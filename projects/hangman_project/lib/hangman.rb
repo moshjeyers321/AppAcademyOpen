@@ -92,6 +92,8 @@ class Hangman
 
 
 
-
+def test
+p "testingtesttest"
+end
 
 end
