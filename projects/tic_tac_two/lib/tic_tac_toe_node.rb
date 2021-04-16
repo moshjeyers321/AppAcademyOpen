@@ -32,8 +32,6 @@ class TicTacToeNode
     end
   end
 
-  # This method generates an array of all moves that can be made after
-  # the current move.
   def children
     children = []
 
