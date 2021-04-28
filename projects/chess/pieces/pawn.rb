@@ -43,6 +43,7 @@ class Pawn < Piece
 
       attacked_piece = board[new_pos]
       attacked_piece && attacked_piece.color != color
+    end
 
   end
 

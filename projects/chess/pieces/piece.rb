@@ -1,4 +1,4 @@
-
+require 'colorize'
 
 class Piece
 
@@ -12,6 +12,10 @@ class Piece
     @color, @board, @pos = color, board, pos
 
     board.add_piece(self, pos)
+  end
+
+  def inspect
+    {'C'=>@color,'P'=> @pos,'S'=> self.to_s}.inspect
   end
 
   def to_s
