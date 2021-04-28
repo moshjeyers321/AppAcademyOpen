@@ -34,11 +34,28 @@ class Board
     self[pos] = piece
   end
 
-  def move_piece(start_pos, end_pos)
-    raise "There's no piece there" if self[start_pos] == nil
-    raise "Position already taken" if self[end_pos].is_a?(Piece)
+  def move_piece(color, start_pos, end_pos)
+    "No piece there" if empty?(start_pos)
 
-    self[start_pos], self[end_pos] = nil, self[start_pos]
+    piece = self[start_pos]
+    if piece.color != color
+      raise "That's not your piece"
+    elsif !piece.moves.include?(end_pos)
+      raise "Piece cannot move there"
+    end
+
+    move_piece!(start_pos, end_pos)
+  end
+
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+    raise "piece cannot move like that" unless piece.moves.include?(end_pos)
+
+    self[end_pos] = piece
+    self[start_pos] = empty_piece
+    piece.pos = end_pos
+
+    nil
 
   end
 
@@ -63,6 +80,11 @@ class Board
   def pieces
     @rows.flatten.reject(&:empty?)
   end
+
+
+
+
+
 
   private
 
