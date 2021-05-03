@@ -8,10 +8,7 @@ class Board
   def initialize(fill_board = true)
     @empty_piece = NullPiece.instance
     @rows = Array.new(8) {Array.new(8, empty_piece)}
-    fill_back_row(:white)
-    fill_pawn_row(:white)
-    fill_back_row(:black)
-    fill_pawn_row(:black)
+    make_starting_grid(fill_board)
 
   end
 
@@ -81,6 +78,33 @@ class Board
     @rows.flatten.reject(&:empty?)
   end
 
+  def checkmate?(color)
+    return false unless in_check?(color)
+
+    pieces.select { |p| p.color == color }.all? do |piece|
+      piece.valid_moves.empty?
+    end
+
+  end
+
+  def in_check?(color)
+    king_pos = find_king(color).pos
+    pieces.any? do |piece|
+      piece.color != color && piece.moves.include?(king_pos)
+    end
+  end
+
+  def find_king(color)
+    # @rows.each do |row|
+    #   row.each do |piece|
+    #     return piece.pos if piece.color == color && piece.is_a?(King)
+    #   end
+    # end
+
+    king = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+    king || (raise "king not found?")
+  end
+
 
 
 
@@ -104,6 +128,14 @@ class Board
     (0..7).each do |j|
       Pawn.new(color, self, [i,j])
     end
+  end
+
+  def make_starting_grid(fill_board)
+    return unless fill_board
+    fill_back_row(:white)
+    fill_pawn_row(:white)
+    fill_back_row(:black)
+    fill_pawn_row(:black)
   end
 
 end
