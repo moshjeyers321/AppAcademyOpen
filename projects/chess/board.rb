@@ -39,6 +39,8 @@ class Board
       raise "That's not your piece"
     elsif !piece.moves.include?(end_pos)
       raise "Piece cannot move there"
+    elsif !piece.valid_moves.include?(end_pos)
+      raise "you can't move into check"
     end
 
     move_piece!(start_pos, end_pos)
