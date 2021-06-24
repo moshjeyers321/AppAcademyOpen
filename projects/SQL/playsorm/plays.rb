@@ -25,7 +25,7 @@ class Play
       FROM plays
       WHERE title = ?
     SQL
-    return nil unless play.lenth > 0
+    return nil unless play.length > 0
 
     Play.new(play.first)
   end
@@ -76,6 +76,8 @@ class Play
 end
 
 class Playwright
+
+  attr_accessor :id, :name, :birth_year
   def self.all
     data = PlayDBConnection.instance.execute("SELECT * FROM playwrights")
     data.map { |datum| Playwright.new(datum) }
@@ -97,7 +99,7 @@ class Playwright
   def initialize(options)
     @id = options['id']
     @name = options['name']
-    @birth_year = options['birth-year']
+    @birth_year = options['birth_year']
   end
 
   def create
@@ -128,5 +130,5 @@ class Playwright
     SQL
     plays.map { |play| Play.new(play)}
   end
-  
+
 end
