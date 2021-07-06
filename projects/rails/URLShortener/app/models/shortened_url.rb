@@ -18,6 +18,16 @@ class ShortenedUrl < ApplicationRecord
     class_name: :User,
     foreign_key: :submitter_id
 
+  has_many :taggings,
+    primary_key: :id,
+    foreign_key: :shortened_url_id,
+    class_name: :Tagging,
+    dependent: :destroy
+
+  has_many :tag_topics,
+    through: :taggings,
+    source: :tag_topic
+
   has_many :visits,
     primary_key: :id,
     foreign_key: :shortened_url_id,
