@@ -50,6 +50,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
   gem 'annotate'
+  gem 'rails-erd'
 
   # These two give you a great error handling page.
   # But make sure to never use them in production!
