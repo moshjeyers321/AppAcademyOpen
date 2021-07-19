@@ -19,4 +19,8 @@ class User < ApplicationRecord
     primary_key: :id,
     foreign_key: :respondent_id,
     class_name: 'Response'
+
+  def completed_polls
+
+  end
 end
