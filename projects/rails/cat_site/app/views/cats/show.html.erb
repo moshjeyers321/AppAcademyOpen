@@ -1,0 +1,16 @@
+<h1><%= @cat.name %></h1>
+
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <% [:age, :birth_date, :color, :sex].each do |attribute| %>
+    <tr>
+      <td><%= attribute.to_s.capitalize.split("_").join(" ") %></td>
+      <td><%= @cat.send(attribute) %></td>
+    </tr>
+    <% end %>
+</table>
+<br><br>
+<a href="<%= edit_cat_url(@cat) %>"><button>Edit <%= @cat.name %></button></a>
